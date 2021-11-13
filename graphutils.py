@@ -1,10 +1,11 @@
+from typing import Dict, List
 from graph import Graph, DirectedGraph, _Node
 from collections import deque
 
 
 class GraphUtils:
     @classmethod
-    def depth_first_traversal_iterative(cls, graph: Graph, node: str):
+    def depth_first_traversal_iterative(cls, graph: Graph, node: str) -> List:
         """
         Using a stack for this iterative implementation of DFS.
 
@@ -35,7 +36,7 @@ class GraphUtils:
         return path
 
     @classmethod
-    def depth_first_traversal_recursive(cls,  graph: Graph, node: str):
+    def depth_first_traversal_recursive(cls,  graph: Graph, node: str) -> List:
         """Returns a list with a DFS traversal of the graph starting at node"""
         if not graph.has_node(node):
             raise ValueError(f'Graph doesn\'t contain node {node}')
@@ -46,7 +47,7 @@ class GraphUtils:
         return path
 
     @classmethod
-    def _dfs_helper(cls, node: _Node, visited: set, path: list):
+    def _dfs_helper(cls, node: _Node, visited: set, path: list) -> None:
         """Recursive helper function for DFS method"""
         path.append(node.value)
         visited.add(node)
@@ -56,7 +57,7 @@ class GraphUtils:
                 cls._dfs_helper(neighbor, visited, path)
 
     @classmethod
-    def find_components(cls,  graph: Graph):
+    def find_components(cls,  graph: Graph) -> List[List]:
         """
         Return a list of lists were each of these list represents a connected component.
         """
@@ -80,7 +81,7 @@ class GraphUtils:
 
     @classmethod
     def _dfs_components(cls, component_id: int, node: _Node, visited: set,
-                        ids_list: list):
+                        ids_list: list) -> None:
         """
         Method finds the connected components in a graphs by doing a dfs
         of every node. It labels all the connected nodes with the same id.
@@ -96,7 +97,7 @@ class GraphUtils:
 
     @classmethod
     def breadth_first_search(cls, graph: Graph, node: str,
-                             returnPrev: bool = False):
+                             returnPrev: bool = False) -> List:
         """Returns a list indicating the BFS path rooted at the node"""
         if not graph.has_node(node):
             raise ValueError('Node not in graph!')
@@ -121,7 +122,7 @@ class GraphUtils:
         return path
 
     @ classmethod
-    def unweighted_shortest_path(cls, graph: Graph, start: str, end: str):
+    def unweighted_shortest_path(cls, graph: Graph, start: str, end: str) -> List:
         """
         Return a list with the shortest path from start node to end node
 
@@ -141,7 +142,7 @@ class GraphUtils:
         return cls._reconstruct_path(start_node, end_node, prev_table)
 
     @ classmethod
-    def _get_prev_table(cls, graph: Graph, start_node: _Node):
+    def _get_prev_table(cls, graph: Graph, start_node: _Node) -> Dict:
         """
         Return a dictionary where key is a graph Node object value and value
         is the parent value of that node in a BFS traversal starting
@@ -167,7 +168,7 @@ class GraphUtils:
         return prev_table
 
     @ classmethod
-    def _reconstruct_path(cls, start: _Node, end: _Node, prev_table: dict):
+    def _reconstruct_path(cls, start: _Node, end: _Node, prev_table: dict) -> List:
         """
         @param start_node : starting node of the path
         @param end_node : ending node of the path

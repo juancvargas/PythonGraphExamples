@@ -1,4 +1,5 @@
 from collections import deque
+from typing import Tuple
 
 
 class Maze:
@@ -28,7 +29,7 @@ class Maze:
         if self._start_index is None:
             raise ValueError('No start symbol "S" provided in the maze.')
 
-    def _get_start_index(self) -> tuple:
+    def _get_start_index(self) -> Tuple:
         """
         Return a tuple indicating the index of the Start Symbol in the grid.
         If the start symbol is not in the grid return None.
@@ -40,7 +41,7 @@ class Maze:
 
         return None
 
-    def find_shorest_path(self) -> None:
+    def find_shortest_path(self) -> None:
         """
         Displays the maze with the shorest path from S to E marked with 
         a SHORTEST_PATH_MARKER character. Performs a BFS starting at the 
@@ -72,7 +73,7 @@ class Maze:
         self._print_maze()
 
     def _explore_neighbors(self, coordinate: tuple, prev_table: dict,
-                           visited: set, queue: deque):
+                           visited: set, queue: deque) -> None:
         """Add the neighbors of the cell at the coordinate in matrix to queue"""
         # direction vectors
         dr = [-1, 1, 0, 0]
@@ -98,7 +99,7 @@ class Maze:
             visited.add(ncord)
             prev_table[ncord] = coordinate
 
-    def _show_reconstructed_path(self, prev_table: dict, end_position: tuple):
+    def _show_reconstructed_path(self, prev_table: dict, end_position: tuple) -> None:
         """
         Backtrack from end position to start position which is the shortest 
         path from start to end and mark all the cells along that path with  
@@ -114,7 +115,7 @@ class Maze:
         print(prompt, end='\n\n')
         self._print_maze()
 
-    def _print_maze(self):
+    def _print_maze(self) -> None:
         for row in range(self._NUM_ROWS):
             for col in range(self._NUM_COLS):
                 print(self._matrix[row][col], end="")

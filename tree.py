@@ -1,10 +1,10 @@
-from typing import Any, Iterable
+from typing import Any, Iterable, List, Set
 
 
 class Tree:
     """Implementation of a rooted tree using an adjacency list."""
     class _Node:
-        def __init__(self, value: Any) -> None:
+        def __init__(self, value: Any):
             self.value = value
             self._children = set()
 
@@ -19,7 +19,7 @@ class Tree:
                 self._children.remove(node)
 
         @property
-        def children(self) -> set['Tree._Node']:
+        def children(self) -> Set['Tree._Node']:
             """Return the children set of the node"""
             return self._children
 
@@ -29,7 +29,7 @@ class Tree:
         def __repr__(self) -> str:
             return f'Node({self.value})'
 
-    def __init__(self, root_value: Any) -> None:
+    def __init__(self, root_value: Any):
         self._root = self._Node(root_value)
         self._nodes = {root_value: self._root}
 
@@ -80,13 +80,13 @@ class Tree:
 class BinaryTree:
     """Implementation of a binary tree"""
     class _Node:
-        def __init__(self, value: Any) -> None:
+        def __init__(self, value: Any):
             self.value = value
             self.left = None
             self.right = None
 
         @property
-        def children(self):
+        def children(self) -> List['BinaryTree._Node']:
             """
             Return a list of strings representing a child of the node with the
             given value.
@@ -99,15 +99,15 @@ class BinaryTree:
         def __repr__(self) -> str:
             return f'Node({self.value})'
 
-    def __init__(self, root_value: Any) -> None:
+    def __init__(self, root_value: Any):
         self._root = self._Node(root_value)
         self._nodes = {root_value: self._root}
 
     @property
-    def root(self):
+    def root(self) -> _Node:
         return self._root
 
-    def add_left_child(self, node_value: Any, left_value: Any):
+    def add_left_child(self, node_value: Any, left_value: Any) -> None:
         node = self._nodes.get(node_value)
 
         if node is None:
@@ -117,7 +117,7 @@ class BinaryTree:
         self._nodes[left_value] = left_node
         node.left = left_node
 
-    def add_right_child(self, node_value: Any, right_value: Any):
+    def add_right_child(self, node_value: Any, right_value: Any) -> None:
         node = self._nodes.get(node_value)
 
         if node is None:

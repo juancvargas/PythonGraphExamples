@@ -106,7 +106,7 @@ def bfs_example():
 
 def maze_example():
     maze = Maze('maze_path_example.txt')
-    maze.find_shorest_path()
+    maze.find_shortest_path()
 
 
 def leaf_sum_example():
@@ -271,15 +271,15 @@ def isomorphism_example():
 
 
 def main():
-    # dfs_example()
-    # connected_components_example()
-    # bfs_example()
-    # maze_example()
-    # leaf_sum_example()
-    # tree_height_example()
-    # rooting_tree_example()
-    # center_node_example()
-    # center_node_example2()
+    dfs_example()
+    connected_components_example()
+    bfs_example()
+    maze_example()
+    leaf_sum_example()
+    tree_height_example()
+    rooting_tree_example()
+    center_node_example()
+    center_node_example2()
     isomorphism_example()
 
 

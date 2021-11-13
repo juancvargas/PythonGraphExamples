@@ -12,7 +12,7 @@ when creating an edge between two nodes.
 """
 
 
-from typing import Any
+from typing import Any, List
 
 
 class _Node:
@@ -20,24 +20,24 @@ class _Node:
         self.value = value
         self._edges = []
 
-    def add_edge(self, to_node: '_Node', weight: int):
+    def add_edge(self, to_node: '_Node', weight: int) -> None:
         self._edges.append(_Edge(self, to_node, weight))
 
-    def has_edge(self, to_node: '_Node'):
+    def has_edge(self, to_node: '_Node') -> bool:
         for edge in self._edges:
             if edge.to_node == to_node:
                 return True
         return False
 
-    def remove_edge(self, edge: '_Edge'):
+    def remove_edge(self, edge: '_Edge') -> None:
         self._edges.remove(edge)
 
     @property
-    def edges(self) -> list['_Edge']:
+    def edges(self) -> List['_Edge']:
         return self._edges
 
     @property
-    def neighbors(self) -> list['_Node']:
+    def neighbors(self) -> List['_Node']:
         """Return a list with the neighbors of the node"""
         return [edge.to_node for edge in self._edges]
 
@@ -74,12 +74,12 @@ class Graph:
         self._nodes_count = 0
         self._edges_count = 0
 
-    def add_node(self, value: Any):
+    def add_node(self, value: Any) -> None:
         if value not in self._nodes:
             self._nodes[value] = _Node(value)
             self._nodes_count += 1
 
-    def remove_node(self, value: Any):
+    def remove_node(self, value: Any) -> None:
         node_to_remove = self._nodes.get(value)
 
         if node_to_remove == None:
@@ -95,10 +95,10 @@ class Graph:
         self._nodes.pop(value)
         self._nodes_count -= 1
 
-    def has_node(self, value: Any):
+    def has_node(self, value: Any) -> bool:
         return value in self._nodes
 
-    def get_node(self, value: Any):
+    def get_node(self, value: Any) -> _Node:
         node = self._nodes.get(value)
 
         if node == None:
@@ -106,7 +106,7 @@ class Graph:
 
         return node
 
-    def add_edge(self, from_value: Any, to_value: Any, weight=_DEFAULT_WEIGHT):
+    def add_edge(self, from_value: Any, to_value: Any, weight=_DEFAULT_WEIGHT) -> None:
         from_node = self._nodes.get(from_value)
         to_node = self._nodes.get(to_value)
         added_edge = False
@@ -126,7 +126,7 @@ class Graph:
 
         self._edges_count += 1 if added_edge else 0
 
-    def remove_edge(self, from_value: Any, to_value: Any):
+    def remove_edge(self, from_value: Any, to_value: Any) -> None:
         from_node = self._nodes.get(from_value)
         to_node = self._nodes.get(to_value)
 
@@ -155,10 +155,10 @@ class Graph:
     def is_tree(self) -> bool:
         return self._edges_count == self._nodes_count - 1
 
-    def is_unweighted(self):
+    def is_unweighted(self) -> bool:
         return self._is_unweighted
 
-    def __str__(self):
+    def __str__(self) -> str:
         output = ''
         for node in self._nodes.values():
             output += f'Node {node.value} is connected to ['
@@ -187,7 +187,7 @@ class DirectedGraph(Graph):
     def __init__(self, unweighted=True):
         super().__init__(unweighted=unweighted)
 
-    def add_edge(self, from_value: Any, to_value: Any, weight=_DEFAULT_WEIGHT):
+    def add_edge(self, from_value: Any, to_value: Any, weight=_DEFAULT_WEIGHT) -> None:
         from_node = self._nodes.get(from_value)
         to_node = self._nodes.get(to_value)
 

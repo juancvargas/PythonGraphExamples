@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 from graph import DirectedGraph, Graph, _Node
 from tree import BinaryTree, Tree
 
@@ -13,7 +13,7 @@ class TreeUtils:
         return cls._leaf_sum_helper(tree.root, 0)
 
     @classmethod
-    def _leaf_sum_helper(cls, node: Tree._Node, sum: int):
+    def _leaf_sum_helper(cls, node: Tree._Node, sum: int) -> int:
         """
         Perform a DFS starting at the node. If node is a leaf return node.value
         else return the sum of all the leaf nodes of that nodes subtrees.
@@ -27,7 +27,7 @@ class TreeUtils:
         return sum
 
     @classmethod
-    def _is_leaf(cls, node: Tree._Node):
+    def _is_leaf(cls, node: Tree._Node) -> bool:
         return len(node.children) == 0
 
     @classmethod
@@ -79,7 +79,7 @@ class TreeUtils:
             cls._build_tree(child, node, tree)
 
     @classmethod
-    def get_center_nodes(cls, tree: Graph) -> list:
+    def get_center_nodes(cls, tree: Graph) -> List:
         """
         Get the center(s) of the tree by iteratively removing leaf nodes until
         the center nodes are found.
@@ -115,7 +115,7 @@ class TreeUtils:
         return leaves  # center(s)
 
     @classmethod
-    def are_isomorphic(cls, tree1: Graph, tree2: Graph):
+    def are_isomorphic(cls, tree1: Graph, tree2: Graph) -> bool:
         """
         Return a boolean indicating if the two trees are isomorphic
 
@@ -142,12 +142,12 @@ class TreeUtils:
         return False
 
     @classmethod
-    def _ahu_encoding(cls, root_tree: Tree):
+    def _ahu_encoding(cls, root_tree: Tree) -> str:
         """AHU algorithm encoding implementation to serialize rooted tree"""
         return cls._ahu_helper(root_tree.root)
 
     @classmethod
-    def _ahu_helper(cls, node: Tree._Node):
+    def _ahu_helper(cls, node: Tree._Node) -> str:
         """Implements the recursion for _ahu_encoding method"""
         if node is None:
             return ""
